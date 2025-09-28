@@ -8,6 +8,18 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCounters();
     initializeCalculators();
     initializePropertySearch();
+    
+    // Debug: Check if chatbot elements are created
+    setTimeout(function() {
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        console.log('Chatbot toggle found:', !!chatbotToggle);
+        console.log('Chatbot container found:', !!chatbotContainer);
+        
+        if (!chatbotToggle) {
+            console.error('Chatbot toggle button not found in DOM');
+        }
+    }, 1000);
 });
 
 // Navigation functionality

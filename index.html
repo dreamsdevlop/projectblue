@@ -655,5 +655,15 @@
 
     <script src="main.js"></script>
     <script src="chatbot.js"></script>
+    
+    <script>
+        // Ensure chatbot initializes after all scripts load
+        window.addEventListener('load', function() {
+            if (!window.geminiChatbot) {
+                console.log('Initializing chatbot...');
+                window.geminiChatbot = new GeminiChatbot();
+            }
+        });
+    </script>
 </body>
 </html>

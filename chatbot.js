@@ -459,7 +459,7 @@ class GeminiChatbot {
 // Initialize chatbot when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Check if API key is set
-    const apiKey = 'apiKey= 'AIzaSyCSmSOczf-c1Mq41IbdUy9tBAmnSNLq1lw'; // Replace with your actual API key
+    const apiKey = 'AIzaSyCSmSOczf-c1Mq41IbdUy9tBAmnSNLq1lw'; // Replace with your actual API key
     if (apiKey === 'YOUR_GEMINI_API_KEY') {
         console.warn('Please set your Gemini API key in chatbot.js');
     }
