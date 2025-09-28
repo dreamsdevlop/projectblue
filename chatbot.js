@@ -1,7 +1,7 @@
 // Gemini AI Chatbot Integration with Voice and Text Features
 class GeminiChatbot {
     constructor() {
-        this.apiKey ='AIzaSyCSmSOczfc1Mq41IbdUy9tBAmnSNLq1lwJtmM01pY'; // Replace with your actual API key
+        this.apiKey ='AIzaSyCSmSOczfc1Mq41IbdUy9tBAmnSNLq1lw'; // Replace with your actual API key
         this.apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
         this.isListening = false;
         this.recognition = null;
@@ -459,7 +459,7 @@ class GeminiChatbot {
 // Initialize chatbot when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Check if API key is set
-    const apiKey ='AIzaSyCSmSOczfc1Mq41IbdUy9tBAmnSNLq1lwJtmM01pY'; // Replace with your actual API key
+    const apiKey ='AIzaSyCSmSOczfc1Mq41IbdUy9tBAmnSNLq1lw'; // Replace with your actual API key
     if (apiKey === 'YOUR_GEMINI_API_KEY') {
         console.warn('Please set your Gemini API key in chatbot.js');
     }
