@@ -21,6 +21,33 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     
+    <!-- Chatbot Styles -->
+    <style>
+        .chatbot-message {
+            animation: slideInMessage 0.3s ease-out;
+        }
+        
+        @keyframes slideInMessage {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .voice-pulse {
+            animation: voicePulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes voicePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+    </style>
+    
     <script>
         tailwind.config = {
             theme: {
@@ -612,9 +639,9 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Contact</h4>
                     <ul class="space-y-2 text-blue-200">
-                        <li>Lahore: +92 42 1234567</li>
-                        <li>Islamabad: +92 51 1234567</li>
-                        <li>Karachi: +92 21 1234567</li>
+                        <li>Lahore: 03490417705</li>
+                        <li>Islamabad: 03490417705</li>
+                        <li>Karachi: 03490417705</li>
                         <li>info@shahidmehmood.com.pk</li>
                     </ul>
                 </div>
@@ -627,5 +654,6 @@
     </footer>
 
     <script src="main.js"></script>
+    <script src="chatbot.js"></script>
 </body>
 </html>

@@ -454,3 +454,118 @@ window.calculateMortgage = calculateMortgage;
 window.calculateStampDuty = calculateStampDuty;
 window.calculatePropertyTax = calculatePropertyTax;
 window.calculateROI = calculateROI;
+
+// Enhanced notification system for chatbot integration
+function showChatbotNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm ${
+        type === 'success' ? 'bg-success text-white' :
+        type === 'error' ? 'bg-red-500 text-white' :
+        type === 'warning' ? 'bg-alert text-white' :
+        'bg-navy text-white'
+    }`;
+    notification.innerHTML = `
+        <div class="flex items-center space-x-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    anime({
+        targets: notification,
+        translateX: [300, 0],
+        opacity: [0, 1],
+        duration: 300,
+        easing: 'easeOutQuart'
+    });
+    
+    setTimeout(() => {
+        anime({
+            targets: notification,
+            translateX: [0, 300],
+            opacity: [1, 0],
+            duration: 300,
+            easing: 'easeInQuart',
+            complete: () => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }
+        });
+    }, 4000);
+}
+
+// Integration with chatbot for property search
+function searchPropertiesWithAI() {
+    const location = document.getElementById('location-select').value;
+    const propertyType = document.getElementById('property-type').value;
+    const priceRange = document.getElementById('price-range').value;
+    const verificationStatus = document.getElementById('verification-status').value;
+    
+    if (!location && !propertyType && !priceRange && !verificationStatus) {
+        // Trigger chatbot if no criteria selected
+        if (window.geminiChatbot && !window.geminiChatbot.isOpen) {
+            window.geminiChatbot.toggleChatbot();
+            setTimeout(() => {
+                window.geminiChatbot.addMessage('I can help you search for properties! What type of property are you looking for and in which city?', 'bot');
+            }, 500);
+        }
+        return;
+    }
+    
+    searchProperties();
+}
+
+// Enhanced quick verify with AI assistance
+function quickVerifyWithAI() {
+    const input = document.querySelector('input[placeholder="Enter Property ID or CNIC"]');
+    const value = input.value.trim();
+    
+    if (!value) {
+        if (window.geminiChatbot && !window.geminiChatbot.isOpen) {
+            window.geminiChatbot.toggleChatbot();
+            setTimeout(() => {
+                window.geminiChatbot.addMessage('I can help you verify a property! Please provide the Property ID, CNIC, or any other property details you have.', 'bot');
+            }, 500);
+        }
+        return;
+    }
+    
+    quickVerify();
+}
+
+// Update search button to use AI integration
+document.addEventListener('DOMContentLoaded', function() {
+    // Update search button onclick
+    const searchBtn = document.querySelector('button[onclick="searchProperties()"]');
+    if (searchBtn) {
+        searchBtn.setAttribute('onclick', 'searchPropertiesWithAI()');
+    }
+    
+    // Update quick verify button onclick
+    const verifyBtn = document.querySelector('button[onclick="quickVerify()"]');
+    if (verifyBtn) {
+        verifyBtn.setAttribute('onclick', 'quickVerifyWithAI()');
+    }
+    
+    // Add chatbot trigger for calculators
+    const calculatorButtons = document.querySelectorAll('button[onclick^="calculate"]');
+    calculatorButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            setTimeout(() => {
+                if (window.geminiChatbot) {
+                    showChatbotNotification('Need help understanding the results? Ask our AI assistant!', 'info');
+                }
+            }, 2000);
+        });
+    });
+});
+
+// Export new functions
+window.searchPropertiesWithAI = searchPropertiesWithAI;
+window.quickVerifyWithAI = quickVerifyWithAI;
+window.showChatbotNotification = showChatbotNotification;
