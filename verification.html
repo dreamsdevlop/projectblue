@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Verification - Shahid Mehmood Property Adviser & Consultant</title>
+    <meta name="description" content="Comprehensive property verification services for Pakistani real estate. Verify property documents, check legal status, and ensure secure transactions.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        'navy': '#1e3a8a',
+                        'charcoal': '#374151',
+                        'gold': '#d97706',
+                        'success': '#059669',
+                        'alert': '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .step-active {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+        }
+        
+        .step-completed {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: white;
+        }
+        
+        .step-inactive {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%);
+            height: 4px;
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+        
+        .document-upload-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .document-upload-area:hover {
+            border-color: #1e3a8a;
+            background-color: #f8fafc;
+        }
+        
+        .document-upload-area.dragover {
+            border-color: #1e3a8a;
+            background-color: #eff6ff;
+        }
+        
+        .verification-status {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-verified {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .status-failed {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .red-flag {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 4px solid #ef4444;
+        }
+        
+        .green-flag {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            border-left: 4px solid #22c55e;
+        }
+    </style>
+</head>
+<body class="font-inter text-charcoal bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="index.html">
+                            <h1 class="text-xl font-playfair font-bold text-navy">Shahid Mehmood</h1>
+                            <p class="text-xs text-charcoal">Property Adviser & Consultant</p>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="text-charcoal hover:text-navy px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="verification.html" class="text-navy px-3 py-2 text-sm font-medium border-b-2 border-navy">Verification</a>
+                        <a href="legal-resources.html" class="text-charcoal hover:text-navy px-3 py-2 text-sm font-medium transition-colors">Legal Resources</a>
+                        <a href="about-consultation.html" class="text-charcoal hover:text-navy px-3 py-2 text-sm font-medium transition-colors">Consultation</a>
+                    </div>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-charcoal hover:text-navy p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="pt-24 pb-12 bg-gradient-to-r from-navy to-blue-600 text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl lg:text-5xl font-playfair font-bold mb-4">Property Verification Center</h1>
+                <p class="text-xl text-blue-100 max-w-3xl mx-auto">Comprehensive property verification services to ensure your investments are secure, legal, and transparent. Follow our step-by-step process for complete peace of mind.</p>
+            </div>
+            
+            <!-- Progress Indicator -->
+            <div class="mt-12">
+                <div class="flex items-center justify-center space-x-4 mb-4">
+                    <div id="progress-step-1" class="w-12 h-12 rounded-full flex items-center justify-center step-active">1</div>
+                    <div class="w-16 h-1 bg-gray-300 rounded"></div>
+                    <div id="progress-step-2" class="w-12 h-12 rounded-full flex items-center justify-center step-inactive">2</div>
+                    <div class="w-16 h-1 bg-gray-300 rounded"></div>
+                    <div id="progress-step-3" class="w-12 h-12 rounded-full flex items-center justify-center step-inactive">3</div>
+                    <div class="w-16 h-1 bg-gray-300 rounded"></div>
+                    <div id="progress-step-4" class="w-12 h-12 rounded-full flex items-center justify-center step-inactive">4</div>
+                    <div class="w-16 h-1 bg-gray-300 rounded"></div>
+                    <div id="progress-step-5" class="w-12 h-12 rounded-full flex items-center justify-center step-inactive">5</div>
+                </div>
+                <div class="text-center text-sm text-blue-100">
+                    <span id="progress-text">Property Details</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verification Wizard -->
+    <section class="py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Sidebar - Verification Steps -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-24">
+                        <h3 class="text-xl font-playfair font-semibold text-navy mb-6">Verification Steps</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3 p-3 rounded-lg step-active" data-step="1">
+                                <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">1</div>
+                                <div>
+                                    <div class="font-semibold">Property Details</div>
+                                    <div class="text-sm opacity-80">Basic property information</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3 p-3 rounded-lg step-inactive" data-step="2">
+                                <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-sm font-bold text-gray-600">2</div>
+                                <div>
+                                    <div class="font-semibold">Document Upload</div>
+                                    <div class="text-sm text-gray-500">Required legal documents</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3 p-3 rounded-lg step-inactive" data-step="3">
+                                <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-sm font-bold text-gray-600">3</div>
+                                <div>
+                                    <div class="font-semibold">Government Verification</div>
+                                    <div class="text-sm text-gray-500">Cross-check with official records</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3 p-3 rounded-lg step-inactive" data-step="4">
+                                <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-sm font-bold text-gray-600">4</div>
+                                <div>
+                                    <div class="font-semibold">Risk Analysis</div>
+                                    <div class="text-sm text-gray-500">Fraud detection and red flags</div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3 p-3 rounded-lg step-inactive" data-step="5">
+                                <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-sm font-bold text-gray-600">5</div>
+                                <div>
+                                    <div class="font-semibold">Verification Report</div>
+                                    <div class="text-sm text-gray-500">Complete analysis and certificate</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+                            <div class="flex items-center space-x-2 mb-2">
+                                <div class="w-3 h-3 bg-success rounded-full animate-pulse"></div>
+                                <span class="text-sm font-semibold text-navy">Live Support Available</span>
+                            </div>
+                            <p class="text-xs text-charcoal">Our experts are here to help you through the verification process.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Content Area -->
+                <div class="lg:col-span-3">
+                    <!-- Step 1: Property Details -->
+                    <div id="step-1" class="verification-step">
+                        <div class="bg-white rounded-2xl shadow-lg p-8">
+                            <h2 class="text-3xl font-playfair font-bold text-navy mb-6">Property Details</h2>
+                            <p class="text-charcoal mb-8">Please provide the basic information about the property you want to verify. This information will be used to cross-check with government records.</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-charcoal mb-2">Property Type *</label>
+                                    <select id="property-type" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                                        <option value="">Select Property Type</option>
+                                        <option value="residential-plot">Residential Plot</option>
+                                        <option value="commercial-plot">Commercial Plot</option>
+                                        <option value="house">House</option>
+                                        <option value="apartment">Apartment/Flat</option>
+                                        <option value="agricultural-land">Agricultural Land</option>
+                                        <option value="commercial-building">Commercial Building</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-charcoal mb-2">Province *</label>
+                                    <select id="property-province" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                                        <option value="">Select Province</option>
+                                        <option value="punjab">Punjab</option>
+                                        <option value="sindh">Sindh</option>
+                                        <option value="kpk">Khyber Pakhtunkhwa</option>
+                                        <option value="balochistan">Balochistan</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-charcoal mb-2">City/District *</label>
+                                    <input type="text" id="property-city" placeholder="Enter city or district name" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-charcoal mb-2">Tehsil/Area</label>
+                                    <input type="text" id="property-tehsil" placeholder="Enter tehsil or area name" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-charcoal mb-2">Khasra Number</label>
+                                    <input type="text" id="khasra-number" placeholder="Enter Khasra number" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-charcoal mb-2">Khewat Number</label>
+                                    <input type="text" id="khewat-number" placeholder="Enter Khewat number" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                                </div>
+                                
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-semibold text-charcoal mb-2">Property Address</label>
+                                    <textarea id="property-address" rows="3" placeholder="Complete property address" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent"></textarea>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-charcoal mb-2">Expected Price (PKR)</label>
+                                    <input type="number" id="property-price" placeholder="Enter expected price" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-charcoal mb-2">Property Size</label>
+                                    <div class="flex space-x-2">
+                                        <input type="number" id="property-size" placeholder="Size" class="flex-1 p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                                        <select id="property-unit" class="p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                                            <option value="marla">Marla</option>
+                                            <option value="kanal">Kanal</option>
+                                            <option value="sqft">Sq Ft</option>
+                                            <option value="sqyd">Sq Yd</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-end mt-8">
+                                <button onclick="nextStep(2)" class="bg-navy text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors">
+                                    Next: Upload Documents
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Document Upload -->
+                    <div id="step-2" class="verification-step hidden">
+                        <div class="bg-white rounded-2xl shadow-lg p-8">
+                            <h2 class="text-3xl font-playfair font-bold text-navy mb-6">Upload Documents</h2>
+                            <p class="text-charcoal mb-8">Upload the required legal documents for verification. All documents should be clear, complete, and in PDF or image format.</p>
+                            
+                            <div class="space-y-8">
+                                <!-- Title Deed/Registry -->
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-navy">Title Deed / Registry</h3>
+                                            <p class="text-sm text-charcoal">Official property ownership document</p>
+                                        </div>
+                                        <span class="verification-status status-verified">Required</span>
+                                    </div>
+                                    
+                                    <div class="document-upload-area p-8 text-center" data-document="title-deed">
+                                        <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                        </svg>
+                                        <p class="text-lg font-semibold text-charcoal mb-2">Upload Title Deed</p>
+                                        <p class="text-sm text-gray-500 mb-4">Drag and drop your file here, or click to browse</p>
+                                        <input type="file" class="hidden" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                                        <button class="bg-navy text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-800 transition-colors">
+                                            Choose File
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="mt-4">
+                                        <div class="text-sm text-charcoal mb-2">Upload Requirements:</div>
+                                        <ul class="text-xs text-gray-500 space-y-1">
+                                            <li>• Clear, readable scan of original document</li>
+                                            <li>• All pages must be included</li>
+                                            <li>• File size should not exceed 10MB</li>
+                                            <li>• PDF format preferred</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <!-- Fard Document -->
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-navy">Fard Malkiat</h3>
+                                            <p class="text-sm text-charcoal">Ownership record from land revenue department</p>
+                                        </div>
+                                        <span class="verification-status status-verified">Required</span>
+                                    </div>
+                                    
+                                    <div class="document-upload-area p-8 text-center" data-document="fard">
+                                        <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                        <p class="text-lg font-semibold text-charcoal mb-2">Upload Fard Document</p>
+                                        <p class="text-sm text-gray-500 mb-4">Drag and drop your file here, or click to browse</p>
+                                        <input type="file" class="hidden" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                                        <button class="bg-navy text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-800 transition-colors">
+                                            Choose File
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- NOC Certificate -->
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-navy">NOC Certificate</h3>
+                                            <p class="text-sm text-charcoal">No Objection Certificate from relevant authority</p>
+                                        </div>
+                                        <span class="verification-status status-pending">Optional</span>
+                                    </div>
+                                    
+                                    <div class="document-upload-area p-8 text-center" data-document="noc">
+                                        <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <p class="text-lg font-semibold text-charcoal mb-2">Upload NOC Certificate</p>
+                                        <p class="text-sm text-gray-500 mb-4">Drag and drop your file here, or click to browse</p>
+                                        <input type="file" class="hidden" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                                        <button class="bg-navy text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-800 transition-colors">
+                                            Choose File
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Tax Receipts -->
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-navy">Tax Payment Receipts</h3>
+                                            <p class="text-sm text-charcoal">Property tax and other government fee receipts</p>
+                                        </div>
+                                        <span class="verification-status status-verified">Required</span>
+                                    </div>
+                                    
+                                    <div class="document-upload-area p-8 text-center" data-document="tax-receipts">
+                                        <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                        </svg>
+                                        <p class="text-lg font-semibold text-charcoal mb-2">Upload Tax Receipts</p>
+                                        <p class="text-sm text-gray-500 mb-4">Drag and drop your file here, or click to browse</p>
+                                        <input type="file" class="hidden" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                                        <button class="bg-navy text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-800 transition-colors">
+                                            Choose File
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8">
+                                <button onclick="previousStep(1)" class="border border-navy text-navy px-8 py-3 rounded-lg font-semibold hover:bg-navy hover:text-white transition-colors">
+                                    Previous
+                                </button>
+                                <button onclick="nextStep(3)" class="bg-navy text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors">
+                                    Next: Government Verification
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Government Verification -->
+                    <div id="step-3" class="verification-step hidden">
+                        <div class="bg-white rounded-2xl shadow-lg p-8">
+                            <h2 class="text-3xl font-playfair font-bold text-navy mb-6">Government Verification</h2>
+                            <p class="text-charcoal mb-8">We are now verifying your property details with official government databases. This process may take a few minutes.</p>
+                            
+                            <div class="space-y-6">
+                                <!-- PLRA Verification -->
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-10 h-10 bg-navy rounded-full flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h3 class="text-lg font-semibold text-navy">Punjab Land Records Authority (PLRA)</h3>
+                                                <p class="text-sm text-charcoal">Verifying ownership records and mutation status</p>
+                                            </div>
+                                        </div>
+                                        <div id="plra-status" class="verification-status status-pending">Checking...</div>
+                                    </div>
+                                    
+                                    <div class="bg-gray-50 rounded-lg p-4">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm text-charcoal">Connection Status:</span>
+                                            <span class="text-sm font-semibold text-success">Connected</span>
+                                        </div>
+                                        <div class="flex items-center justify-between mt-2">
+                                            <span class="text-sm text-charcoal">Records Found:</span>
+                                            <span class="text-sm font-semibold text-navy" id="plra-records">3</span>
+                                        </div>
+                                        <div class="mt-4">
+                                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                                <div id="plra-progress" class="progress-bar w-0"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- LARIMS Verification (for Sindh) -->
+                                <div class="border border-gray-200 rounded-lg p-6 opacity-50">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-10 h-10 bg-gray-400 rounded-full flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h3 class="text-lg font-semibold text-gray-500">Sindh LARIMS System</h3>
+                                                <p class="text-sm text-gray-400">Not applicable for Punjab properties</p>
+                                            </div>
+                                        </div>
+                                        <div class="verification-status status-failed">N/A</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- NADRA Verification -->
+                                <div class="border border-gray-200 rounded-lg p-6">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-10 h-10 bg-navy rounded-full flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h3 class="text-lg font-semibold text-navy">NADRA Identity Verification</h3>
+                                                <p class="text-sm text-charcoal">Verifying seller/buyer identity and ownership claims</p>
+                                            </div>
+                                        </div>
+                                        <div id="nadra-status" class="verification-status status-pending">Checking...</div>
+                                    </div>
+                                    
+                                    <div class="bg-gray-50 rounded-lg p-4">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm text-charcoal">Identity Match:</span>
+                                            <span class="text-sm font-semibold text-success" id="identity-match">Verified</span>
+                                        </div>
+                                        <div class="flex items-center justify-between mt-2">
+                                            <span class="text-sm text-charcoal">CNIC Status:</span>
+                                            <span class="text-sm font-semibold text-success" id="cnic-status">Valid</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8">
+                                <button onclick="previousStep(2)" class="border border-navy text-navy px-8 py-3 rounded-lg font-semibold hover:bg-navy hover:text-white transition-colors">
+                                    Previous
+                                </button>
+                                <button onclick="startGovernmentVerification()" id="verify-gov-btn" class="bg-navy text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors">
+                                    Start Verification Process
+                                </button>
+                                <button onclick="nextStep(4)" id="next-to-risk" class="bg-success text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors hidden">
+                                    Next: Risk Analysis
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Risk Analysis -->
+                    <div id="step-4" class="verification-step hidden">
+                        <div class="bg-white rounded-2xl shadow-lg p-8">
+                            <h2 class="text-3xl font-playfair font-bold text-navy mb-6">Risk Analysis</h2>
+                            <p class="text-charcoal mb-8">Our AI-powered system analyzes potential risks and red flags associated with this property based on the verified information.</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Risk Indicators -->
+                                <div class="space-y-4">
+                                    <h3 class="text-xl font-playfair font-semibold text-navy">Risk Indicators</h3>
+                                    
+                                    <div class="green-flag p-4 rounded-lg">
+                                        <div class="flex items-center space-x-3">
+                                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            <div>
+                                                <div class="font-semibold text-green-800">Clear Title</div>
+                                                <div class="text-sm text-green-600">Property has clear ownership title with no disputes</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="green-flag p-4 rounded-lg">
+                                        <div class="flex items-center space-x-3">
+                                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            <div>
+                                                <div class="font-semibold text-green-800">Taxes Paid</div>
+                                                <div class="text-sm text-green-600">All property taxes are up to date</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="green-flag p-4 rounded-lg">
+                                        <div class="flex items-center space-x-3">
+                                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            <div>
+                                                <div class="font-semibold text-green-800">Valid Documents</div>
+                                                <div class="text-sm text-green-600">All submitted documents are authentic</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Risk Score -->
+                                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6">
+                                    <h3 class="text-xl font-playfair font-semibold text-navy mb-4">Risk Assessment Score</h3>
+                                    
+                                    <div class="text-center mb-6">
+                                        <div class="relative w-32 h-32 mx-auto">
+                                            <svg class="w-32 h-32 transform -rotate-90" viewBox="0 0 120 120">
+                                                <circle cx="60" cy="60" r="50" stroke="#e5e7eb" stroke-width="8" fill="none"/>
+                                                <circle cx="60" cy="60" r="50" stroke="#22c55e" stroke-width="8" fill="none" 
+                                                        stroke-dasharray="314" stroke-dashoffset="62.8" stroke-linecap="round"/>
+                                            </svg>
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <span class="text-3xl font-bold text-green-600">80</span>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-charcoal mt-2">Low Risk Property</p>
+                                    </div>
+                                    
+                                    <div class="space-y-3">
+                                        <div class="flex justify-between text-sm">
+                                            <span class="text-charcoal">Fraud Risk:</span>
+                                            <span class="text-success font-semibold">Very Low</span>
+                                        </div>
+                                        <div class="flex justify-between text-sm">
+                                            <span class="text-charcoal">Legal Issues:</span>
+                                            <span class="text-success font-semibold">None Detected</span>
+                                        </div>
+                                        <div class="flex justify-between text-sm">
+                                            <span class="text-charcoal">Ownership Disputes:</span>
+                                            <span class="text-success font-semibold">None</span>
+                                        </div>
+                                        <div class="flex justify-between text-sm">
+                                            <span class="text-charcoal">Encumbrances:</span>
+                                            <span class="text-success font-semibold">None</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8">
+                                <button onclick="previousStep(3)" class="border border-navy text-navy px-8 py-3 rounded-lg font-semibold hover:bg-navy hover:text-white transition-colors">
+                                    Previous
+                                </button>
+                                <button onclick="nextStep(5)" class="bg-navy text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors">
+                                    Next: Verification Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5: Verification Report -->
+                    <div id="step-5" class="verification-step hidden">
+                        <div class="bg-white rounded-2xl shadow-lg p-8">
+                            <h2 class="text-3xl font-playfair font-bold text-navy mb-6">Verification Report</h2>
+                            <p class="text-charcoal mb-8">Your comprehensive property verification report is ready. This report includes all verification results, risk assessment, and recommendations.</p>
+                            
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                <!-- Report Summary -->
+                                <div class="lg:col-span-2 space-y-6">
+                                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-6">
+                                        <div class="flex items-center space-x-3 mb-4">
+                                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            <h3 class="text-xl font-playfair font-semibold text-green-800">Verification Complete</h3>
+                                        </div>
+                                        <p class="text-green-700 mb-4">This property has been successfully verified and is recommended for investment.</p>
+                                        
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="text-center">
+                                                <div class="text-2xl font-bold text-green-600">15</div>
+                                                <div class="text-sm text-green-700">Documents Verified</div>
+                                            </div>
+                                            <div class="text-center">
+                                                <div class="text-2xl font-bold text-green-600">2.5hrs</div>
+                                                <div class="text-sm text-green-700">Processing Time</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Verification Details -->
+                                    <div class="border border-gray-200 rounded-lg p-6">
+                                        <h3 class="text-lg font-semibold text-navy mb-4">Verification Details</h3>
+                                        
+                                        <div class="space-y-4">
+                                            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                                                <span class="text-charcoal">Property Type:</span>
+                                                <span class="font-semibold text-navy">Residential Plot</span>
+                                            </div>
+                                            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                                                <span class="text-charcoal">Location:</span>
+                                                <span class="font-semibold text-navy">DHA Phase 5, Lahore</span>
+                                            </div>
+                                            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                                                <span class="text-charcoal">Verification Date:</span>
+                                                <span class="font-semibold text-navy">September 28, 2025</span>
+                                            </div>
+                                            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                                                <span class="text-charcoal">Verification ID:</span>
+                                                <span class="font-semibold text-navy">SM-2025-0928-001</span>
+                                            </div>
+                                            <div class="flex items-center justify-between py-2">
+                                                <span class="text-charcoal">Overall Status:</span>
+                                                <span class="verification-status status-verified">Verified</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Recommendations -->
+                                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                                        <h3 class="text-lg font-semibold text-navy mb-4">Our Recommendations</h3>
+                                        <ul class="space-y-2 text-charcoal">
+                                            <li class="flex items-start space-x-2">
+                                                <svg class="w-5 h-5 text-success mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                                <span>Property has clear title and is safe for investment</span>
+                                            </li>
+                                            <li class="flex items-start space-x-2">
+                                                <svg class="w-5 h-5 text-success mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                                <span>All taxes and fees are paid up to date</span>
+                                            </li>
+                                            <li class="flex items-start space-x-2">
+                                                <svg class="w-5 h-5 text-alert mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                                </svg>
+                                                <span>Consider getting property insurance for additional protection</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <!-- Actions -->
+                                <div class="space-y-4">
+                                    <div class="bg-white border border-gray-200 rounded-lg p-6">
+                                        <h3 class="text-lg font-semibold text-navy mb-4">Download Report</h3>
+                                        <p class="text-sm text-charcoal mb-4">Get your complete verification report in PDF format</p>
+                                        <button onclick="downloadReport()" class="w-full bg-navy text-white py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors">
+                                            Download PDF Report
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="bg-white border border-gray-200 rounded-lg p-6">
+                                        <h3 class="text-lg font-semibold text-navy mb-4">Share Report</h3>
+                                        <p class="text-sm text-charcoal mb-4">Share this verification with banks, buyers, or sellers</p>
+                                        <div class="space-y-2">
+                                            <button onclick="shareViaEmail()" class="w-full bg-gold text-white py-2 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
+                                                Share via Email
+                                            </button>
+                                            <button onclick="generateLink()" class="w-full border border-navy text-navy py-2 rounded-lg font-semibold hover:bg-navy hover:text-white transition-colors">
+                                                Generate Shareable Link
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-gradient-to-br from-navy to-blue-600 text-white rounded-lg p-6">
+                                        <h3 class="text-lg font-semibold mb-4">Need Legal Help?</h3>
+                                        <p class="text-sm text-blue-100 mb-4">Get expert legal advice for your property transaction</p>
+                                        <button onclick="bookConsultation()" class="w-full bg-white text-navy py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                                            Book Consultation
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-playfair font-bold mb-2">Shahid Mehmood</h3>
+                        <p class="text-blue-200">Property Adviser & Consultant</p>
+                    </div>
+                    <p class="text-blue-200 mb-4">
+                        Pakistan's premier property verification and legal consultation service. We ensure secure, transparent, and legally compliant property transactions across Pakistan.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="verification.html" class="hover:text-white transition-colors">Property Verification</a></li>
+                        <li><a href="legal-resources.html" class="hover:text-white transition-colors">Legal Documentation</a></li>
+                        <li><a href="about-consultation.html" class="hover:text-white transition-colors">Consultation Services</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li>Lahore: +92 42 1234567</li>
+                        <li>Islamabad: +92 51 1234567</li>
+                        <li>info@shahidmehmood.com.pk</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-800 mt-8 pt-8 text-center text-blue-200">
+                <p>&copy; 2025 Shahid Mehmood Property Adviser & Consultant. All rights reserved. | Licensed by Punjab Land Records Authority</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Verification Wizard JavaScript
+        let currentStep = 1;
+        let verificationData = {};
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeVerificationWizard();
+            initializeDocumentUpload();
+        });
+        
+        function initializeVerificationWizard() {
+            // Add event listeners for step navigation
+            document.querySelectorAll('[data-step]').forEach(step => {
+                step.addEventListener('click', function() {
+                    const stepNumber = parseInt(this.getAttribute('data-step'));
+                    if (stepNumber <= currentStep + 1) {
+                        goToStep(stepNumber);
+                    }
+                });
+            });
+        }
+        
+        function initializeDocumentUpload() {
+            // Add drag and drop functionality for document uploads
+            document.querySelectorAll('.document-upload-area').forEach(area => {
+                const input = area.querySelector('input[type="file"]');
+                const button = area.querySelector('button');
+                
+                button.addEventListener('click', () => input.click());
+                
+                area.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.classList.add('dragover');
+                });
+                
+                area.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('dragover');
+                });
+                
+                area.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('dragover');
+                    const files = e.dataTransfer.files;
+                    handleFileUpload(files, this.getAttribute('data-document'));
+                });
+                
+                input.addEventListener('change', function() {
+                    handleFileUpload(this.files, area.getAttribute('data-document'));
+                });
+            });
+        }
+        
+        function handleFileUpload(files, documentType) {
+            if (files.length > 0) {
+                const file = files[0];
+                const uploadArea = document.querySelector(`[data-document="${documentType}"]`);
+                
+                // Show upload progress
+                uploadArea.innerHTML = `
+                    <div class="text-center">
+                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-navy mx-auto mb-4"></div>
+                        <p class="text-lg font-semibold text-charcoal mb-2">Uploading ${file.name}</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-navy h-2 rounded-full transition-all duration-300" style="width: 100%"></div>
+                        </div>
+                    </div>
+                `;
+                
+                // Simulate upload completion
+                setTimeout(() => {
+                    uploadArea.innerHTML = `
+                        <div class="text-center">
+                            <svg class="w-12 h-12 text-success mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <p class="text-lg font-semibold text-charcoal mb-2">File Uploaded Successfully</p>
+                            <p class="text-sm text-gray-500">${file.name} - ${(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                        </div>
+                    `;
+                    uploadArea.classList.add('border-green-300', 'bg-green-50');
+                }, 2000);
+            }
+        }
+        
+        function nextStep(step) {
+            if (validateCurrentStep()) {
+                goToStep(step);
+            }
+        }
+        
+        function previousStep(step) {
+            goToStep(step);
+        }
+        
+        function goToStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.verification-step').forEach(stepEl => {
+                stepEl.classList.add('hidden');
+            });
+            
+            // Show target step
+            document.getElementById(`step-${step}`).classList.remove('hidden');
+            
+            // Update progress indicators
+            updateProgressIndicators(step);
+            
+            currentStep = step;
+            
+            // Scroll to top of content
+            document.querySelector('.verification-step:not(.hidden)').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        
+        function updateProgressIndicators(step) {
+            const stepNames = [
+                '',
+                'Property Details',
+                'Document Upload',
+                'Government Verification',
+                'Risk Analysis',
+                'Verification Report'
+            ];
+            
+            document.getElementById('progress-text').textContent = stepNames[step];
+            
+            for (let i = 1; i <= 5; i++) {
+                const stepEl = document.getElementById(`progress-step-${i}`);
+                const sidebarStep = document.querySelector(`[data-step="${i}"]`);
+                
+                if (i < step) {
+                    stepEl.className = 'w-12 h-12 rounded-full flex items-center justify-center step-completed';
+                    sidebarStep.className = 'flex items-center space-x-3 p-3 rounded-lg step-completed cursor-pointer';
+                } else if (i === step) {
+                    stepEl.className = 'w-12 h-12 rounded-full flex items-center justify-center step-active';
+                    sidebarStep.className = 'flex items-center space-x-3 p-3 rounded-lg step-active cursor-pointer';
+                } else {
+                    stepEl.className = 'w-12 h-12 rounded-full flex items-center justify-center step-inactive';
+                    sidebarStep.className = 'flex items-center space-x-3 p-3 rounded-lg step-inactive cursor-pointer';
+                }
+            }
+        }
+        
+        function validateCurrentStep() {
+            switch (currentStep) {
+                case 1:
+                    return validatePropertyDetails();
+                case 2:
+                    return validateDocumentUpload();
+                case 3:
+                    return true; // Government verification is automatic
+                case 4:
+                    return true; // Risk analysis is automatic
+                default:
+                    return true;
+            }
+        }
+        
+        function validatePropertyDetails() {
+            const requiredFields = ['property-type', 'property-province', 'property-city'];
+            let isValid = true;
+            
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    field.classList.add('border-red-500');
+                    isValid = false;
+                } else {
+                    field.classList.remove('border-red-500');
+                }
+            });
+            
+            if (!isValid) {
+                alert('Please fill in all required fields before proceeding.');
+            }
+            
+            return isValid;
+        }
+        
+        function validateDocumentUpload() {
+            // In a real application, check if required documents are uploaded
+            return true;
+        }
+        
+        function startGovernmentVerification() {
+            const button = document.getElementById('verify-gov-btn');
+            const nextButton = document.getElementById('next-to-risk');
+            
+            button.textContent = 'Verifying...';
+            button.disabled = true;
+            
+            // Simulate verification process
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                document.getElementById('plra-progress').style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    
+                    // Update status indicators
+                    document.getElementById('plra-status').textContent = 'Verified';
+                    document.getElementById('plra-status').className = 'verification-status status-verified';
+                    
+                    document.getElementById('nadra-status').textContent = 'Verified';
+                    document.getElementById('nadra-status').className = 'verification-status status-verified';
+                    
+                    // Show next button
+                    button.classList.add('hidden');
+                    nextButton.classList.remove('hidden');
+                }
+            }, 200);
+        }
+        
+        function downloadReport() {
+            // Simulate PDF download
+            const link = document.createElement('a');
+            link.href = '#';
+            link.download = `Property-Verification-Report-${new Date().toISOString().split('T')[0]}.pdf`;
+            link.click();
+            
+            alert('Verification report download started. Check your downloads folder.');
+        }
+        
+        function shareViaEmail() {
+            const email = prompt('Enter email address to share the report:');
+            if (email && email.includes('@')) {
+                alert(`Verification report will be sent to ${email} shortly.`);
+            }
+        }
+        
+        function generateLink() {
+            const shareLink = `https://shahidmehmood.com.pk/verify/SM-2025-0928-001`;
+            navigator.clipboard.writeText(shareLink).then(() => {
+                alert('Shareable link copied to clipboard!');
+            });
+        }
+        
+        function bookConsultation() {
+            window.location.href = 'about-consultation.html';
+        }
+        
+        // Mobile menu functionality
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            // Add mobile menu toggle functionality
+        });
+    </script>
+</body>
+</html>

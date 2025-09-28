@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shahid Mehmood Property Adviser & Consultant | Pakistan's Trusted Property Legal Hub</title>
+    <meta name="description" content="Pakistan's premier digital hub for property transactions, legal verification, and consultation services. Trusted by thousands for secure property deals.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        'navy': '#1e3a8a',
+                        'charcoal': '#374151',
+                        'gold': '#d97706',
+                        'success': '#059669',
+                        'alert': '#f59e0b'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(255, 255, 255, 0.9) 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #1e3a8a 0%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .splide__arrow {
+            background: #1e3a8a !important;
+            opacity: 0.8;
+        }
+        
+        .splide__arrow:hover {
+            opacity: 1;
+        }
+        
+        .calculator-widget {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+    </style>
+</head>
+<body class="font-inter text-charcoal bg-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-xl font-playfair font-bold text-navy">Shahid Mehmood</h1>
+                        <p class="text-xs text-charcoal">Property Adviser & Consultant</p>
+                    </div>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="text-charcoal hover:text-navy px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="verification.html" class="text-charcoal hover:text-navy px-3 py-2 text-sm font-medium transition-colors">Verification</a>
+                        <a href="legal-resources.html" class="text-charcoal hover:text-navy px-3 py-2 text-sm font-medium transition-colors">Legal Resources</a>
+                        <a href="about-consultation.html" class="text-charcoal hover:text-navy px-3 py-2 text-sm font-medium transition-colors">Consultation</a>
+                    </div>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-charcoal hover:text-navy p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="text-charcoal hover:text-navy block px-3 py-2 text-base font-medium">Home</a>
+                <a href="verification.html" class="text-charcoal hover:text-navy block px-3 py-2 text-base font-medium">Verification</a>
+                <a href="legal-resources.html" class="text-charcoal hover:text-navy block px-3 py-2 text-base font-medium">Legal Resources</a>
+                <a href="about-consultation.html" class="text-charcoal hover:text-navy block px-3 py-2 text-base font-medium">Consultation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg pt-16 min-h-screen flex items-center">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="space-y-4">
+                        <h1 class="text-5xl lg:text-6xl font-playfair font-bold leading-tight">
+                            <span class="gradient-text" id="typed-text"></span>
+                        </h1>
+                        <p class="text-xl text-charcoal leading-relaxed">
+                            Your trusted partner for secure property transactions, legal verification, and expert consultation across Pakistan. We make property deals transparent, safe, and legally compliant.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="scrollToSection('verification-tools')" class="bg-navy text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-800 transition-colors shadow-lg hover:shadow-xl">
+                            Start Property Verification
+                        </button>
+                        <button onclick="scrollToSection('calculators')" class="border-2 border-navy text-navy px-8 py-4 rounded-lg font-semibold hover:bg-navy hover:text-white transition-colors">
+                            Calculate Costs
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-8 pt-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-navy" data-count="15000">0</div>
+                            <div class="text-sm text-charcoal">Properties Verified</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-navy" data-count="25000">0</div>
+                            <div class="text-sm text-charcoal">Documents Processed</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-navy" data-count="5000">0</div>
+                            <div class="text-sm text-charcoal">Happy Clients</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <img src="resources/hero-building.png" alt="Modern professional building representing trust and reliability" class="w-full h-auto rounded-2xl shadow-2xl animate-float">
+                    <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-3 h-3 bg-success rounded-full animate-pulse"></div>
+                            <span class="text-sm font-semibold text-charcoal">24/7 Verification Available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Search & Tools -->
+    <section id="verification-tools" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-playfair font-bold text-navy mb-4">Property Search & Verification</h2>
+                <p class="text-xl text-charcoal max-w-3xl mx-auto">Find and verify properties with our comprehensive search and verification tools. Ensure legal compliance before making any investment.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Search Panel -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-lg p-8">
+                        <h3 class="text-2xl font-playfair font-semibold text-navy mb-6">Search Properties</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-charcoal mb-2">Location</label>
+                                <select id="location-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                                    <option value="">Select City</option>
+                                    <option value="lahore">Lahore</option>
+                                    <option value="islamabad">Islamabad</option>
+                                    <option value="karachi">Karachi</option>
+                                    <option value="rawalpindi">Rawalpindi</option>
+                                    <option value="faisalabad">Faisalabad</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold text-charcoal mb-2">Property Type</label>
+                                <select id="property-type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                                    <option value="">Select Type</option>
+                                    <option value="residential">Residential</option>
+                                    <option value="commercial">Commercial</option>
+                                    <option value="agricultural">Agricultural</option>
+                                    <option value="industrial">Industrial</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold text-charcoal mb-2">Price Range (PKR)</label>
+                                <select id="price-range" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                                    <option value="">Any Price</option>
+                                    <option value="1-5000000">5M - 50M</option>
+                                    <option value="5000000-20000000">50M - 200M</option>
+                                    <option value="20000000-50000000">200M - 500M</option>
+                                    <option value="50000000+">500M+</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold text-charcoal mb-2">Verification Status</label>
+                                <select id="verification-status" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                                    <option value="">Any Status</option>
+                                    <option value="verified">Verified</option>
+                                    <option value="pending">Pending Verification</option>
+                                    <option value="needs-attention">Needs Attention</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button onclick="searchProperties()" class="w-full bg-navy text-white py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors">
+                            Search Properties
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Quick Verification -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <h3 class="text-xl font-playfair font-semibold text-navy mb-4">Quick Verification</h3>
+                        <div class="space-y-4">
+                            <input type="text" placeholder="Enter Property ID or CNIC" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent">
+                            <button onclick="quickVerify()" class="w-full bg-success text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors">
+                                Verify Now
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <h3 class="text-xl font-playfair font-semibold text-navy mb-4">Verification Status</h3>
+                        <div id="verification-results" class="text-center text-charcoal">
+                            Enter property details to check verification status
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financial Calculators -->
+    <section id="calculators" class="py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-playfair font-bold text-navy mb-4">Financial Calculators</h2>
+                <p class="text-xl text-charcoal max-w-3xl mx-auto">Calculate mortgage payments, stamp duty, property taxes, and investment returns with our comprehensive financial tools.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Mortgage Calculator -->
+                <div class="calculator-widget rounded-2xl p-6 space-y-4">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-navy rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-playfair font-semibold text-navy mb-2">Mortgage Calculator</h3>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <input type="number" id="property-price" placeholder="Property Price (PKR)" class="w-full p-3 border border-gray-300 rounded-lg">
+                        <input type="number" id="down-payment" placeholder="Down Payment (%)" class="w-full p-3 border border-gray-300 rounded-lg">
+                        <input type="number" id="interest-rate" placeholder="Interest Rate (%)" class="w-full p-3 border border-gray-300 rounded-lg">
+                        <input type="number" id="loan-term" placeholder="Loan Term (Years)" class="w-full p-3 border border-gray-300 rounded-lg">
+                        <button onclick="calculateMortgage()" class="w-full bg-navy text-white py-2 rounded-lg font-semibold hover:bg-blue-800 transition-colors">
+                            Calculate
+                        </button>
+                        <div id="mortgage-result" class="text-center font-semibold text-navy"></div>
+                    </div>
+                </div>
+                
+                <!-- Stamp Duty Calculator -->
+                <div class="calculator-widget rounded-2xl p-6 space-y-4">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-playfair font-semibold text-navy mb-2">Stamp Duty</h3>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <select id="province-select" class="w-full p-3 border border-gray-300 rounded-lg">
+                            <option value="">Select Province</option>
+                            <option value="punjab">Punjab</option>
+                            <option value="sindh">Sindh</option>
+                            <option value="kpk">KPK</option>
+                            <option value="balochistan">Balochistan</option>
+                        </select>
+                        <input type="number" id="property-value" placeholder="Property Value (PKR)" class="w-full p-3 border border-gray-300 rounded-lg">
+                        <button onclick="calculateStampDuty()" class="w-full bg-gold text-white py-2 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
+                            Calculate
+                        </button>
+                        <div id="stamp-duty-result" class="text-center font-semibold text-navy"></div>
+                    </div>
+                </div>
+                
+                <!-- Property Tax Calculator -->
+                <div class="calculator-widget rounded-2xl p-6 space-y-4">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-success rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-playfair font-semibold text-navy mb-2">Property Tax</h3>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <select id="tax-province" class="w-full p-3 border border-gray-300 rounded-lg">
+                            <option value="">Select Province</option>
+                            <option value="punjab">Punjab</option>
+                            <option value="sindh">Sindh</option>
+                            <option value="kpk">KPK</option>
+                            <option value="balochistan">Balochistan</option>
+                        </select>
+                        <input type="number" id="annual-value" placeholder="Annual Rental Value (PKR)" class="w-full p-3 border border-gray-300 rounded-lg">
+                        <button onclick="calculatePropertyTax()" class="w-full bg-success text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition-colors">
+                            Calculate
+                        </button>
+                        <div id="property-tax-result" class="text-center font-semibold text-navy"></div>
+                    </div>
+                </div>
+                
+                <!-- ROI Calculator -->
+                <div class="calculator-widget rounded-2xl p-6 space-y-4">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-alert rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-playfair font-semibold text-navy mb-2">ROI Calculator</h3>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <input type="number" id="investment-amount" placeholder="Investment Amount (PKR)" class="w-full p-3 border border-gray-300 rounded-lg">
+                        <input type="number" id="monthly-rent" placeholder="Monthly Rent (PKR)" class="w-full p-3 border border-gray-300 rounded-lg">
+                        <input type="number" id="annual-expenses" placeholder="Annual Expenses (PKR)" class="w-full p-3 border border-gray-300 rounded-lg">
+                        <button onclick="calculateROI()" class="w-full bg-alert text-white py-2 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
+                            Calculate
+                        </button>
+                        <div id="roi-result" class="text-center font-semibold text-navy"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-playfair font-bold text-navy mb-4">Featured Properties</h2>
+                <p class="text-xl text-charcoal max-w-3xl mx-auto">Discover verified properties with complete legal documentation and transparent pricing. All properties undergo rigorous verification processes.</p>
+            </div>
+            
+            <div class="splide" id="property-carousel">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                                <img src="https://kimi-web-img.moonshot.cn/img/cf.bstatic.com/e49a23b719b2e5f9846b4a2f52e3e26b2ff6a714.jpg" alt="Modern apartment complex in Pakistan" class="w-full h-64 object-cover">
+                                <div class="p-6">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="bg-success text-white px-3 py-1 rounded-full text-sm font-semibold">Verified</span>
+                                        <span class="text-2xl font-bold text-navy">PKR 45M</span>
+                                    </div>
+                                    <h3 class="text-xl font-playfair font-semibold text-navy mb-2">Luxury Apartment Complex</h3>
+                                    <p class="text-charcoal mb-4">DHA Phase 5, Lahore</p>
+                                    <div class="flex items-center justify-between text-sm text-charcoal">
+                                        <span>3 Bedrooms</span>
+                                        <span>2,500 sq ft</span>
+                                        <span>Ready to Move</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="splide__slide">
+                            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                                <img src="https://kimi-web-img.moonshot.cn/img/investin.pk/3449c09585b8b644a692d41b6c1f6b47c74af0e5.jpeg" alt="Premium residential property" class="w-full h-64 object-cover">
+                                <div class="p-6">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="bg-success text-white px-3 py-1 rounded-full text-sm font-semibold">Verified</span>
+                                        <span class="text-2xl font-bold text-navy">PKR 85M</span>
+                                    </div>
+                                    <h3 class="text-xl font-playfair font-semibold text-navy mb-2">Premium Villa</h3>
+                                    <p class="text-charcoal mb-4">Bahria Town, Islamabad</p>
+                                    <div class="flex items-center justify-between text-sm text-charcoal">
+                                        <span>5 Bedrooms</span>
+                                        <span>4,000 sq ft</span>
+                                        <span>Ready to Move</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="splide__slide">
+                            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                                <img src="https://kimi-web-img.moonshot.cn/img/archello.s3.eu-central-1.amazonaws.com/04c1483eabdf11e4a5b27068a25dd5cdb01ac046.jpeg" alt="Modern commercial building" class="w-full h-64 object-cover">
+                                <div class="p-6">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="bg-alert text-white px-3 py-1 rounded-full text-sm font-semibold">Needs Review</span>
+                                        <span class="text-2xl font-bold text-navy">PKR 120M</span>
+                                    </div>
+                                    <h3 class="text-xl font-playfair font-semibold text-navy mb-2">Commercial Plaza</h3>
+                                    <p class="text-charcoal mb-4">Gulberg, Lahore</p>
+                                    <div class="flex items-center justify-between text-sm text-charcoal">
+                                        <span>Commercial</span>
+                                        <span>8,000 sq ft</span>
+                                        <span>Under Construction</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="splide__slide">
+                            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                                <img src="https://kimi-web-img.moonshot.cn/img/images.adsttc.com/5ffd344a9c03563c46785a68df15d89c055e520c.jpg" alt="Luxury residential complex" class="w-full h-64 object-cover">
+                                <div class="p-6">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="bg-success text-white px-3 py-1 rounded-full text-sm font-semibold">Verified</span>
+                                        <span class="text-2xl font-bold text-navy">PKR 65M</span>
+                                    </div>
+                                    <h3 class="text-xl font-playfair font-semibold text-navy mb-2">Luxury Penthouse</h3>
+                                    <p class="text-charcoal mb-4">Clifton, Karachi</p>
+                                    <div class="flex items-center justify-between text-sm text-charcoal">
+                                        <span>4 Bedrooms</span>
+                                        <span>3,200 sq ft</span>
+                                        <span>Ready to Move</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="verification.html" class="bg-navy text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-800 transition-colors shadow-lg hover:shadow-xl">
+                    View All Properties
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Indicators -->
+    <section class="py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-playfair font-bold text-navy mb-4">Why Choose Us</h2>
+                <p class="text-xl text-charcoal max-w-3xl mx-auto">Pakistan's most trusted property advisory service with comprehensive legal expertise and transparent processes.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center space-y-4">
+                    <div class="w-20 h-20 bg-navy rounded-full flex items-center justify-center mx-auto">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-playfair font-semibold text-navy">Legal Security</h3>
+                    <p class="text-charcoal">Complete legal verification and documentation services ensuring your property investments are secure and compliant with Pakistani law.</p>
+                </div>
+                
+                <div class="text-center space-y-4">
+                    <div class="w-20 h-20 bg-gold rounded-full flex items-center justify-center mx-auto">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-playfair font-semibold text-navy">Fast Processing</h3>
+                    <p class="text-charcoal">Quick verification and documentation processing with our streamlined digital systems and expert team coordination.</p>
+                </div>
+                
+                <div class="text-center space-y-4">
+                    <div class="w-20 h-20 bg-success rounded-full flex items-center justify-center mx-auto">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-playfair font-semibold text-navy">Expert Team</h3>
+                    <p class="text-charcoal">Experienced legal professionals and property advisors with deep knowledge of Pakistani real estate laws and market dynamics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Testimonials -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-playfair font-bold text-navy mb-4">What Our Clients Say</h2>
+                <p class="text-xl text-charcoal max-w-3xl mx-auto">Real stories from satisfied clients who trusted us with their property transactions.</p>
+            </div>
+            
+            <div class="splide" id="testimonial-carousel">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+                                <div class="w-20 h-20 bg-gray-300 rounded-full mx-auto mb-6 flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-charcoal">AS</span>
+                                </div>
+                                <blockquote class="text-lg text-charcoal mb-6 italic">
+                                    "Shahid Mehmood's team saved me from a fraudulent property deal. Their thorough verification process revealed issues that would have cost me millions. Highly recommended for anyone serious about property investment in Pakistan."
+                                </blockquote>
+                                <div class="font-semibold text-navy">Ahmed Saeed</div>
+                                <div class="text-sm text-charcoal">Property Investor, Lahore</div>
+                            </div>
+                        </li>
+                        
+                        <li class="splide__slide">
+                            <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+                                <div class="w-20 h-20 bg-gray-300 rounded-full mx-auto mb-6 flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-charcoal">FK</span>
+                                </div>
+                                <blockquote class="text-lg text-charcoal mb-6 italic">
+                                    "As an overseas Pakistani, I was worried about property fraud. This platform provided complete transparency and legal security. The team handled everything professionally and kept me informed throughout the process."
+                                </blockquote>
+                                <div class="font-semibold text-navy">Fatima Khan</div>
+                                <div class="text-sm text-charcoal">Overseas Pakistani, Dubai</div>
+                            </div>
+                        </li>
+                        
+                        <li class="splide__slide">
+                            <div class="bg-white rounded-2xl shadow-lg p-8 text-center">
+                                <div class="w-20 h-20 bg-gray-300 rounded-full mx-auto mb-6 flex items-center justify-center">
+                                    <span class="text-2xl font-bold text-charcoal">RH</span>
+                                </div>
+                                <blockquote class="text-lg text-charcoal mb-6 italic">
+                                    "The legal documentation service is exceptional. They prepared all my property documents, handled the verification process, and ensured everything was compliant with current laws. Worth every penny for peace of mind."
+                                </blockquote>
+                                <div class="font-semibold text-navy">Rashid Hussain</div>
+                                <div class="text-sm text-charcoal">Business Owner, Islamabad</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-playfair font-bold mb-2">Shahid Mehmood</h3>
+                        <p class="text-blue-200">Property Adviser & Consultant</p>
+                    </div>
+                    <p class="text-blue-200 mb-4">
+                        Pakistan's premier property verification and legal consultation service. We ensure secure, transparent, and legally compliant property transactions across Pakistan.
+                    </p>
+                    <div class="flex space-x-4">
+                        <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center">
+                            <span class="text-sm font-bold">P</span>
+                        </div>
+                        <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center">
+                            <span class="text-sm font-bold">L</span>
+                        </div>
+                        <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center">
+                            <span class="text-sm font-bold">F</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="verification.html" class="hover:text-white transition-colors">Property Verification</a></li>
+                        <li><a href="legal-resources.html" class="hover:text-white transition-colors">Legal Documentation</a></li>
+                        <li><a href="about-consultation.html" class="hover:text-white transition-colors">Consultation Services</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Market Analysis</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li>Lahore: +92 42 1234567</li>
+                        <li>Islamabad: +92 51 1234567</li>
+                        <li>Karachi: +92 21 1234567</li>
+                        <li>info@shahidmehmood.com.pk</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-800 mt-8 pt-8 text-center text-blue-200">
+                <p>&copy; 2025 Shahid Mehmood Property Adviser & Consultant. All rights reserved. | Licensed by Punjab Land Records Authority</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
